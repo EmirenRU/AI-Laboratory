@@ -1,0 +1,6 @@
+[submodule "webscraping"]
+	path = webscraping
+	url = https://github.com/i-ajlan/webscraping.git
+[submodule "betting_ai_project"]
+	path = betting_ai_project
+	url = https://github.com/Jordaniakondzo/betting_ai_project.git
