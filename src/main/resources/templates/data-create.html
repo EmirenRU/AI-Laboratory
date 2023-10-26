@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Data Create</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5" >
+        <div class="container">
+            <form role="form" method="post" th:action="@{/post-data}" th:object="${matchData}">
+                <div class="container">
+                    <div class="form-row">
+                        <div class="form-group col-md6">
+                            <label for="home_team">Home Team Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="home_team"
+                                   name="home_team"
+                                   th:field="*{home_team}"
+                                   placeholder="Enter home team name">
+                            <p th:if="@{#fields.hasErrors('home_team'}" class="text-danger" th:errors="*{home_team}"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="away_team">Away Team Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="away_team"
+                                   name="away_team"
+                                   th:field="*{away_team}"
+                                   placeholder="Enter away team name">
+                            <p th:if="@{#fields.hasErrors('away_team')}" class="text-danger" th:errors="*{away_team}"></p>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>
