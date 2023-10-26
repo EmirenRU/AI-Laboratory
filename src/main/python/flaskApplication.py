@@ -1,3 +1,4 @@
+import pandas
 from flask import Flask, request, jsonify
 from IA_Soccer_Prediction import predict
 from webscraping.matchesScraper.matchesScraper.spiders import ligaspider
@@ -84,12 +85,16 @@ def make_prediction():
         print(jsonify({"error": "Request to Java application failed: " + str(e)}), 500)
 
     dataFrame = pd.json_normalize(response)
+    if len(dataFrame.columns) < 86:
+        missing_columns = 86 - len(dataFrame.columns)
+    default_values = [0] * missing_columns  # You can adjust the default value as needed
+    for i in range(missing_columns):
+        column_name = f"{}"
+        dataFrame[column_name] = default_values
 
-    result = predict.map_predictions_to_results(
-        make_prediction(
-            model=predict.load_trained_model(),
-            input_data=dataFrame)
-    )
+    prediction_data = pandas.DataFrame[dataFrame.columns]
+
+    result = predict.map_predictions_to_results( predict.make_prediction(predict.load_trained_model(), prediction_data))
     print(result)
 
 
